@@ -17,12 +17,42 @@ In order to prepare persistant volumes, you will need to prepare your configurat
 You will need to get the Configs and Mods content from the container by running the following command:
 
 ```bash
-make copy_configs
+ECO_TAG=latest make copy_configs
 ```
 
 You will now see the `Configs/` and `Mods/` folders populated. Any files you plan on modifying or mods added need to be added to the `conf.d` and `mod.d` folders respectively. After files are staged in the `conf.d` and `mod.d` directory, a `make copy_configs` needs to be ran to stage the `conf.d` and `mod.d` files for server use.
 
 For example, I need to edit the `network.eco` file for my server information. I copy the `network.eco.template` file to my `conf.d` folder and edit it there. Now that the changes are made, I run `make copy_configs` and the `network.eco` file is ready for use.
+
+### Launch the Server
+
+You are now set to run your server!
+
+```bash
+ECO_TAG=latest make deploy
+```
+
+### Stop the Server
+
+If you need to shut the server down use:
+
+```bash
+make stop
+```
+
+### Updating the server
+
+Ensure your server is offline.
+
+Identify the docker tag you intend to migrate to.
+
+You will need to run a `make copy_configs` command prior to updating. This will update any files necessary in the `Configs` and `Mods` folder. You may need to update files in `conf.d` and `mod.d`. Keep an eye on which files changed.
+
+Once you are done updating the configuration files, you should be able to point to the new tag and launch the server:
+
+```bash
+ECO_TAG=0.9.0.2-some-tag make deploy
+```
 
 ### Fork Me!
 
