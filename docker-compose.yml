@@ -1,0 +1,13 @@
+version: '3'
+services:
+  eco:
+    image: strangeloopgames/eco-game-server:${ECO_TAG}
+    restart: always
+    volumes:
+      - ./Storage:/app/Storage
+      - ./Backups:/app/Storage/Backup
+      - ./Configs:/app/Configs
+      - ./Mods:/app/Mods
+    ports:
+      - 3000:3000
+      - 3001:3001
